@@ -14,23 +14,22 @@ export default function Login() {
     };
 
     const handleLogin = async() => { 
+        // check if either of the fields is not filled raise message 
+        // validate email field 
+        if (!email.trim()) { 
+            // clear the email iid and password fields 
+            alert("Email is Required");
+            handleClearFields();
+            return;
+        }
+
+        if (!password.trim()) {
+            // clear the email id and password fields 
+            alert("Password is Required");
+            handleClearFields();
+            return;
+        }
         try { 
-            // check if either of the fields is not filled raise message 
-            if (!email.trim()) { 
-                // clear the email iid and password fields 
-                alert("Email is Required");
-                handleClearFields();
-                return;
-            }
-
-            if (!password.trim()) {
-                // clear the email id and password fields 
-                alert("Password is Required");
-                handleClearFields();
-                return;
-            }
-            // validate email field 
-
             // call the api 
             // this is not working cause the backend is not running ad need to implement full service 
             const res = await login({email, password});
