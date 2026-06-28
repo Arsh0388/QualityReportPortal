@@ -30,6 +30,7 @@ public class LoginController {
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest request) { 
         // validate the request , register user and login as well 
         // RegisterResponse registerResponse = authService.register(request);
+        
     }
 
     @PostMapping("/login")

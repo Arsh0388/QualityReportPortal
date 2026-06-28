@@ -20,6 +20,6 @@ public class RegisterRequest {
     private String emailAddress;
 
     @NotBlank
-    private String passwordHashed;
+    private String password;
 
 }
