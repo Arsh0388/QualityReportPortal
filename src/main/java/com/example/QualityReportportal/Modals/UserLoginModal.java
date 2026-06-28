@@ -31,5 +31,13 @@ public class UserLoginModal {
     @NotBlank
     @Column(nullable = false)
     private String hashedPassword;
-    
+
+    @NotBlank
+    @Column(nullable = false)
+    private String firstName;
+
+    @NotBlank
+    @Column(nullable = false)
+    private String lastName;
+
 }

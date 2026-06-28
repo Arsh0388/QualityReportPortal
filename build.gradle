@@ -1,6 +1,6 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.3.5' // Spring Boot 4.x is not stable/released
+	id 'org.springframework.boot' version '3.3.5'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
@@ -18,31 +18,37 @@ repositories {
 }
 
 dependencies {
-	// ================= CORE =================
+	// ================= CORE & WEB =================
 	implementation 'org.springframework.boot:spring-boot-starter'
-
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-
-	// ================= VALIDATION =================
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 
-	// ================= JWT (AUTH TOKEN) =================
+	// ================= DATABASE & PERSISTENCE =================
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	runtimeOnly 'com.h2database:h2' // Development Database
+	// Explicit Jakarta annotation mapping helper (Optional but highly recommended for complex Modals)
+	implementation 'jakarta.persistence:jakarta.persistence-api'
+
+	// ================= SECURITY & JWT =================
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	
+	// JJWT Token Library Configuration
 	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
 	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 
-	// ================= DATABASE =================
-	runtimeOnly 'com.h2database:h2' // dev only
+	// Safe property binding for custom security keys (e.g., jwt.secret)
+	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 
-	// ================= LOMBOK =================
+	// ================= LOMBOK (REDUCE BOILERPLATE) =================
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
+	
+	// Ensures Lombok works seamlessly when writing Unit/Integration Tests
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
 
-	// ================= TEST =================
+	// ================= TESTING =================
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'

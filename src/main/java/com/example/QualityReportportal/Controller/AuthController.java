@@ -1,15 +1,18 @@
 package com.example.QualityReportportal.Controller;
 import com.example.QualityReportportal.Request.LoginRequest;
+import com.example.QualityReportportal.Request.RegisterRequest;
 import com.example.QualityReportportal.Response.LoginResponse;
+import com.example.QualityReportportal.Response.RegisterResponse;
 import com.example.QualityReportportal.Service.AuthService;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:5173") // this is a quick way to fix cors error 
 @RestController
 @RequestMapping("/api/auth") // this is the base url of classs
-public class LoginController {
+public class AuthController {
     /* 
     what the controller class is going to do - 
     Accept request
@@ -20,17 +23,17 @@ public class LoginController {
     // through annotations we are going to validate whether we are having a correct requestbody  
     // matching the details as per java RegisterRequest class 
 
-    private AuthService authService;
+    private final AuthService authService;
 
-    public LoginController(AuthService authService) { 
+    public AuthController(AuthService authService) { 
         this.authService = authService;
     }
     
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody RegisterRequest request) { 
         // validate the request , register user and login as well 
-        // RegisterResponse registerResponse = authService.register(request);
-        
+        RegisterResponse registerResponse = this.authService.register(request);
+        return ResponseEntity.ok(registerResponse);
     }
 
     @PostMapping("/login")

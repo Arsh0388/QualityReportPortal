@@ -9,17 +9,17 @@ import lombok.Setter;
 @Setter
 public class RegisterRequest {
     
-    @NotBlank
+    @NotBlank(message = "first Name is required field")
     private String firstName;
 
-    @NotBlank
+    @NotBlank(message = "Last name is a required field")
     private String lastName;
 
-    @NotBlank
-    @Email
+    @NotBlank(message = "Email is required field")
+    @Email(message = "Email is not Valid")
     private String emailAddress;
 
-    @NotBlank
+    @NotBlank(message = " password must be present")
     private String password;
 
 }
