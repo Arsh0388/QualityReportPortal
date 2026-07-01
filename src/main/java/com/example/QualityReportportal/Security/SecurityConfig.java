@@ -25,13 +25,14 @@ public class SecurityConfig {
 
     // security configuration - cors policy impementation handling 
     @Bean
-    public CorsConfigurationSource CorsConfigurationSource() { 
+    public CorsConfigurationSource corsConfigurationSource() { 
         CorsConfiguration configuration = new CorsConfiguration();
 
         // set allowed origin 
         configuration.setAllowedOrigins(List.of(
             "http://localhost:5173"
         )); 
+
         // set allowed methods 
         configuration.setAllowedMethods(List.of(
             "GET",
@@ -65,19 +66,17 @@ public class SecurityConfig {
     → Controller
     */
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)
-            throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            .cors(Customizer.withDefaults()) // this tells spring spring to use my corsConfigurationSource Bean 
-            .csrf(csrf -> csrf.disable()) // csrf is disabled cause we are implementing jwt token
+            .csrf(csrf -> csrf.disable())
+            .cors(Customizer.withDefaults()) // IMPORTANT CHANGE
             .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll() // only auth points are open public one 
-                        // rest are protected endpoints 
-                        .anyRequest().authenticated() // is it authenticated 
-                );
+                .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll()
+                .requestMatchers("/api/auth/**").permitAll()
+                .anyRequest().authenticated()
+            );
 
         return http.build();
     }
-
 }

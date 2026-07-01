@@ -27,8 +27,9 @@ public class AuthService {
     }
 
     public LoginResponse login(LoginRequest loginRequest) { 
-        String emailId = loginRequest.getEmail();
+        String emailId = loginRequest.getEmailAddress();
         String password = loginRequest.getPassword();
+        System.out.println("email is " + emailId);
         Optional<UserLoginModal> userOptional = authRepository.findByEmailId(emailId);
 
         LoginResponse response = new LoginResponse();
