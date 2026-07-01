@@ -6,10 +6,12 @@ import com.example.QualityReportportal.Response.RegisterResponse;
 import com.example.QualityReportportal.Service.AuthService;
 
 import jakarta.validation.Valid;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-@CrossOrigin(origins = "http://localhost:5173") // this is a quick way to fix cors error 
 @RestController
 @RequestMapping("/api/auth") // this is the base url of classs
 public class AuthController {
@@ -22,8 +24,9 @@ public class AuthController {
     */
     // through annotations we are going to validate whether we are having a correct requestbody  
     // matching the details as per java RegisterRequest class 
-
+    
     private final AuthService authService;
+    private static final Logger log = LoggerFactory.getLogger(AuthController.class); // provide class based logging mechanism for easy tracking and debugging 
 
     public AuthController(AuthService authService) { 
         this.authService = authService;
@@ -39,6 +42,8 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody LoginRequest request) { 
         // validate credentials and login user 
+        log.info("entered - controller method");
+        System.out.println("entered - controller login method"); 
         LoginResponse loginResponse = authService.login(request);
         return ResponseEntity.ok(loginResponse);
     }
