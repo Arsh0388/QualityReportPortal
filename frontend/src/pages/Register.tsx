@@ -4,14 +4,14 @@ import {register} from "../services/AuthServices";
 export default function Register() { 
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
+    const [emailAddress, setEmailAddress] = useState("");
     const [password, setPassword] = useState("");
 
     const handleClearFields = () => { 
         console.log(" clear all fields cause of validation fail");
         setFirstName("");
         setLastName("");
-        setEmail("");
+        setEmailAddress("");
         setPassword("");
     }
     const handleRegister = async() => {
@@ -30,7 +30,7 @@ export default function Register() {
             return;
         }
 
-        if (!email.trim()) {
+        if (!emailAddress.trim()) {
             alert("Email is required");
             handleClearFields();
             return;
@@ -43,7 +43,7 @@ export default function Register() {
         }
 
         // 2. Email format validation
-        if (!emailRegex.test(email)) {
+        if (!emailRegex.test(emailAddress)) {
             alert("Invalid email format");
             handleClearFields();
             return;
@@ -56,7 +56,7 @@ export default function Register() {
         }
         try { 
             // call register api and handle new user registeration 
-            const res = await register({firstName, lastName, email, password});
+            const res = await register({firstName, lastName, emailAddress, password});
             // hanlde response 
             if (res.status = 200) { 
                 // handle jwt token validation ad 
@@ -83,8 +83,8 @@ export default function Register() {
 
             <input 
             placeholder = "jonCarter@gmail.com"
-            value = {email}
-            onChange = {(e) => setEmail(e.target.value)}>
+            value = {emailAddress}
+            onChange = {(e) => setEmailAddress(e.target.value)}>
             </input>
 
             <input
