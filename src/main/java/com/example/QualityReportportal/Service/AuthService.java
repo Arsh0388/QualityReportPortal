@@ -51,7 +51,7 @@ public class AuthService {
         }
         //create a jwt  Token then 
         System.out.println("need to create jwt token  ");
-        // then return the response 
+        
         response.setSuccess(true);
         response.setStatusCode(200);
         response.setMessage("Login successful");
@@ -133,4 +133,5 @@ public class AuthService {
         }
         return isNumeric && isUpperCase && isLowerCase && isSpecialCharacter;
     }
+
 }

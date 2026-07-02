@@ -53,7 +53,7 @@ public class SecurityConfig {
 
     /**
      * Spring Security Configuration
-     * every incoming requests goes through this 
+     * every incoming requests goes through this
      * Request → SecurityFilterChain → Controller
      */
     /*
@@ -62,7 +62,7 @@ public class SecurityConfig {
     CSRF Filter
     Authentication Filter
     Authorization Filter
-    // the role based access control will take place here I guess , 
+    // the role based access control will take place here I guess ,
     → Controller
     */
     @Bean

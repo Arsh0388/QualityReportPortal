@@ -43,7 +43,7 @@ public class AuthController {
     public ResponseEntity<LoginResponse> loginUser(@Valid @RequestBody LoginRequest request) { 
         // validate credentials and login user 
         log.info("entered - controller method");
-        System.out.println("entered - controller login method"); 
+        log.info("entered - controller login method"); 
         LoginResponse loginResponse = authService.login(request);
         return ResponseEntity.ok(loginResponse);
     }

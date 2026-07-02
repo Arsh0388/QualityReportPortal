@@ -4,19 +4,19 @@ import { login } from "../services/AuthServices";
 
 export default function Login() { 
     // we are going to have two fields email and password for signup 
-    const [email,setEmail] = useState("") // by default fix  email is the variable 
+    const [emailAddress,setEmailAddress] = useState("") // by default fix  email is the variable 
     const [password,setPassword] = useState(""); // field setup 
 
     const handleClearFields = async() => {
         console.log("not working ");
-        setEmail("");
+        setEmailAddress("");
         setPassword("");
     };
 
     const handleLogin = async() => { 
         // check if either of the fields is not filled raise message 
         // validate email field 
-        if (!email.trim()) { 
+        if (!emailAddress.trim()) { 
             // clear the email iid and password fields 
             alert("Email is Required");
             handleClearFields();
@@ -32,7 +32,7 @@ export default function Login() {
         try { 
             // call the api 
             // this is not working cause the backend is not running ad need to implement full service 
-            const res = await login({email, password});
+            const res = await login({emailAddress, password});
             console.log("");
             if (res.status === 200) { 
                 // ok status 
@@ -54,9 +54,9 @@ export default function Login() {
 
         <input
         placeholder = "Email"
-        value = {email}
+        value = {emailAddress}
         // e stands for event object containing multiple things , target is htmlElement - e.target === <input />
-        onChange = {(e) => setEmail(e.target.value)}> 
+        onChange = {(e) => setEmailAddress(e.target.value)}> 
         </input>
         <input
         placeholder = "Password"
